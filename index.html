@@ -60,6 +60,26 @@
             50% { transform: scale(1.2); }
             100% { transform: scale(1); }
         }
+        .ghost {
+            font-size: 5em;
+            animation: float 2s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        .monster {
+            font-size: 5em;
+            animation: shake 0.5s infinite;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
         button {
             background: #ff0000;
             color: #000;
@@ -81,15 +101,143 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="skull"><i class="fas fa-skull"></i></div>
-        <h1>WARNING: You've Been Pranked!</h1>
-        <p>
-            Hai Temankuh, kamu kira ini aman? Ternyata... SURPRISE! Ini prank dari aku. 
-            Jangan panik, ini cuma lelucon. Tapi kalau kamu takut, klik tombol di bawah untuk "kabur"!
-        </p>
-        <button onclick="location.reload()">Run!</button>
-        <div class="footer">Prank by Dur - Don't take it seriously 😈</div>
+    <div class="container" id="slideContainer">
+        <!-- Slide 1: Peringatan Awal -->
+        <div id="slide1">
+            <div class="skull"><i class="fas fa-skull"></i></div>
+            <h1>WARNING: You've Been Pranked!</h1>
+            <p>
+                Hai Temankuh, kamu kira ini aman? Ternyata... SURPRISE! Ini prank dari aku. 
+                Jangan panik, ini cuma lelucon. Tapi kalau kamu takut, klik tombol di bawah untuk "kabur"!
+            </p>
+            <button onclick="nextSlide(1)">Run!</button>
+            <div class="footer">Prank by Dur - Don't take it seriously 😈</div>
+        </div>
+        
+        <!-- Slide 2: Gambar Hantu -->
+        <div id="slide2" style="display: none;">
+            <div class="ghost">👻</div>
+            <h1>BOO! Hantu Muncul!</h1>
+            <p>
+                Hahaha! Kamu berhasil kabur ke slide berikutnya. Ini gambar hantu yang menakutkan! 
+                Kalau mau lanjut, klik tombol di bawah.
+            </p>
+            <button onclick="nextSlide(2)">Continue!</button>
+            <div class="footer">Prank by Dur - Still not serious 😈</div>
+        </div>
+        
+        <!-- Slide 3: Virus Alert -->
+        <div id="slide3" style="display: none;">
+            <div class="skull"><i class="fas fa-virus"></i></div>
+            <h1>VIRUS DETECTED!</h1>
+            <p>
+                Oh tidak! Sistem kamu terinfeksi virus prank! Data kamu akan hilang dalam 10 detik... 
+                Klik cepat untuk "menyelamatkan"!
+            </p>
+            <button onclick="nextSlide(3)">Save Me!</button>
+            <div class="footer">Prank by Dur - Just kidding! 😈</div>
+        </div>
+        
+        <!-- Slide 4: Monster -->
+        <div id="slide4" style="display: none;">
+            <div class="monster">🦹‍♂️</div>
+            <h1>MONSTER ATTACK!</h1>
+            <p>
+                Aaargh! Monster muncul dari kegelapan! Dia lapar dan mencari korban. 
+                Lari ke slide berikutnya sebelum terlambat!
+            </p>
+            <button onclick="nextSlide(4)">Run Away!</button>
+            <div class="footer">Prank by Dur - No real monsters here 😈</div>
+        </div>
+        
+        <!-- Slide 5: Haunted House -->
+        <div id="slide5" style="display: none;">
+            <div class="ghost">🏚️👻</div>
+            <h1>HAUNTED HOUSE!</h1>
+            <p>
+                Selamat datang di rumah hantu! Pintu-pintu menutup sendiri, dan suara-suara aneh terdengar. 
+                Klik untuk keluar... atau masuk lebih dalam?
+            </p>
+            <button onclick="nextSlide(5)">Enter!</button>
+            <div class="footer">Prank by Dur - It's all fake! 😈</div>
+        </div>
+        
+        <!-- Slide 6: Zombie Apocalypse -->
+        <div id="slide6" style="display: none;">
+            <div class="monster">🧟‍♂️</div>
+            <h1>ZOMBIE APOCALYPSE!</h1>
+            <p>
+                Dunia berakhir! Zombie-zombie mengejar kamu. Kamu adalah yang terakhir yang hidup. 
+                Klik untuk bertahan hidup!
+            </p>
+            <button onclick="nextSlide(6)">Survive!</button>
+            <div class="footer">Prank by Dur - No zombies, promise! 😈</div>
+        </div>
+        
+        <!-- Slide 7: Alien Invasion -->
+        <div id="slide7" style="display: none;">
+            <div class="ghost">👽</div>
+            <h1>ALIEN INVASION!</h1>
+            <p>
+                Alien dari luar angkasa mendarat! Mereka datang untuk menaklukkan Bumi. 
+                Klik untuk melawan... atau menyerah?
+            </p>
+            <button onclick="nextSlide(7)">Fight Back!</button>
+            <div class="footer">Prank by Dur - Aliens are friendly in movies 😈</div>
+        </div>
+        
+        <!-- Slide 8: Time Loop -->
+        <div id="slide8" style="display: none;">
+            <div class="skull"><i class="fas fa-clock"></i></div>
+            <h1>TIME LOOP!</h1>
+            <p>
+                Kamu terjebak dalam loop waktu! Hari ini berulang selamanya. 
+                Klik untuk mencoba keluar dari loop ini.
+            </p>
+            <button onclick="nextSlide(8)">Break the Loop!</button>
+            <div class="footer">Prank by Dur - Or is it? 😈</div>
+        </div>
+        
+        <!-- Slide 9: Final Scare -->
+        <div id="slide9" style="display: none;">
+            <div class="monster">👹</div>
+            <h1>FINAL SCARE!</h1>
+            <p>
+                Ini yang terakhir... atau bukan? Klik untuk melihat apa yang terjadi selanjutnya!
+            </p>
+            <button onclick="nextSlide(9)">What Next?</button>
+            <div class="footer">Prank by Dur - Almost done... 😈</div>
+        </div>
+        
+        <!-- Slide 10: Loop Back -->
+        <div id="slide10" style="display: none;">
+            <div class="ghost">🔄</div>
+            <h1>LOOP BACK!</h1>
+            <p>
+                Hahaha! Kamu kembali ke awal. Prank ini tak pernah berakhir! 
+                Klik untuk mulai lagi dari slide pertama.
+            </p>
+            <button onclick="resetToStart()">Start Over!</button>
+            <div class="footer">Prank by Dur - Endless fun! 😈</div>
+        </div>
     </div>
+
+    <script>
+        function nextSlide(currentSlide) {
+            document.getElementById('slide' + currentSlide).style.display = 'none';
+            let next = currentSlide + 1;
+            if (next > 10) next = 1; // Loop back if beyond slide 10
+            document.getElementById('slide' + next).style.display = 'block';
+        }
+        
+        function resetToStart() {
+            // Hide all slides
+            for (let i = 1; i <= 10; i++) {
+                document.getElementById('slide' + i).style.display = 'none';
+            }
+            // Show slide 1
+            document.getElementById('slide1').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
